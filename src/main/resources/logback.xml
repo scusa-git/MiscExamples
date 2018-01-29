@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration debug="false" scan="true" scanPeriod="30 seconds">
+
+	<property name="logPattern" value="%d{HH:mm:ss.SSS} [%thread] %-5level %logger - %msg%n%rEx" />
+
+	<!-- LOGS -->
+	<property name="LOG_FILE" value="${LOGS}/logs.log" />
+	<property name="ROLLING_FILE" value="${LOGS}/logs.%d{yyyy-MM-dd}.log" />
+
+	<!-- Console -->
+	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<charset>UTF-8</charset>
+			<pattern>${logPattern}</pattern>
+		</encoder>
+	</appender>
+
+	<!-- LOG FILE -->
+	<appender name="LOG_FILE"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${LOG_FILE}</file>
+		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+			<level>INFO</level>
+			<level>DEBUG</level>
+			<onMatch>ACCEPT</onMatch>
+			<onMismatch>DENY</onMismatch>
+		</filter>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<!-- Daily rollover -->
+			<fileNamePattern>${ROLLING_FILE}</fileNamePattern>
+
+			<!-- Keep 10 days' worth of history -->
+			<maxHistory>10</maxHistory>
+		</rollingPolicy>
+
+		<encoder>
+			<charset>UTF-8</charset>
+			<pattern>${logPattern}</pattern>
+		</encoder>
+	</appender>
+
+	<!-- LOGGER -->
+	<logger name="eu.unicredit.mars" additivity="false">
+		<level value="DEBUG" />
+		<appender-ref ref="STDOUT" />
+		<appender-ref ref="LOG_FILE" />
+	</logger>
+
+	<logger name="org.apache.commons" additivity="false">
+		<level value="INFO" />
+		<appender-ref ref="STDOUT" />
+		<appender-ref ref="LOG_FILE" />
+	</logger>
+
+	<logger name="org.springframework.security.core.AuthenticationException"
+		additivity="false">
+		<level value="WARN" />
+		<appender-ref ref="STDOUT" />
+		<appender-ref ref="LOG_FILE" />
+	</logger>
+
+	<!-- Configure so that it outputs to both console and log file -->
+	<!-- <root level="DEBUG"> -->
+	<root level="INFO">
+		<appender-ref ref="STDOUT" />
+		<!-- <appender-ref ref="FILE" /> -->
+	</root>
+</configuration> 
