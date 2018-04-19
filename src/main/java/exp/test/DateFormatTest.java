@@ -8,6 +8,8 @@ import java.util.Locale;
 
 public class DateFormatTest {
 	
+	public static final SimpleDateFormat YYYYMMDD = new SimpleDateFormat("yyyyMMdd");
+	
 	public static void fromToFormat(String verdat) {
 		
 		Locale locale = Locale.US;
@@ -26,6 +28,10 @@ public class DateFormatTest {
 		System.out.println("new verdatString: "+ verdatString);
 	}
 	
+	public static void today() {
+		System.out.println("TODAY:"+(YYYYMMDD.format(new Date())));
+	}
+	
 	public static String originFormat() {
 		Locale locale = Locale.US;
 		DateFormat df = new SimpleDateFormat("dd.MMM.yyyy", locale);
@@ -39,6 +45,7 @@ public class DateFormatTest {
 		
 		fromToFormat(oD);
 		
+		today();
 	}
 
 }

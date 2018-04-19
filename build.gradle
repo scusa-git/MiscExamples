@@ -1,16 +1,18 @@
-buildscript {
-	repositories {
-		mavenCentral()
-	}
-}
 
 apply plugin: 'java'
 apply plugin: 'eclipse'
 
+
 group = 'misc.examples'
 version = '0.0.1-SNAPSHOT'
+
+
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
+
+ext {
+	springVersion = '5.0.5.RELEASE'
+}
 
 repositories {
 	mavenCentral()
@@ -18,17 +20,19 @@ repositories {
 
 
 dependencies {
-	compile group: 'commons-codec', name: 'commons-codec', version: '1.11'
-	compile group: 'commons-io', name: 'commons-io', version: '2.6'
-	compile group: 'ch.qos.logback', name: 'logback-core', version: '1.2.3'
-	compile group: 'ch.qos.logback', name: 'logback-classic', version: '1.2.3'
-	//testCompile group: 'ch.qos.logback', name: 'logback-classic', version: '1.2.3'
-	compile group: 'org.slf4j', name: 'slf4j-api', version: '1.7.25'
-	// spring
-	compile group: 'org.springframework', name: 'spring-context', version: '${spring.version}'
-	compile group: 'org.springframework', name: 'spring-core', version: '${spring.version}'
-	compile group: 'org.springframework', name: 'spring-beans', version: '${spring.version}'
-	compile group: 'org.springframework', name: 'spring-context-support', version: '${spring.version}'
-	compile group: 'org.springframework', name: 'spring-expression', version: '${spring.version}'
+	compile ("com.hierynomus:sshj:0.23.0")
+	compile ("commons-codec:commons-codec:1.11")
+	compile ("commons-io:commons-io:2.6")
+	compile ("ch.qos.logback:logback-core:1.2.3")
+	compile ("ch.qos.logback:logback-classic:1.2.3")
+	compile ("org.slf4j:slf4j-api:1.7.25")
 	
+	// spring
+	compile ("org.springframework:spring-context:${springVersion}")
+	compile ("org.springframework:spring-core:${springVersion}")
+	compile ("org.springframework:spring-beans:${springVersion}")
+	compile ("org.springframework:spring-context-support:${springVersion}")
+	compile ("org.springframework:spring-expression:${springVersion}")
+	
+	//testCompile group: 'ch.qos.logback', name: 'logback-classic', version: '1.2.3'
 }
